@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: ceritacerdas-express
+    restart: always
+    env_file: .env
+    ports:
+      - "${PORT:-3000}:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
+
+  db:
+    image: postgres:16
+    container_name: ceritacerdas-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-express_app}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata-ichsan:/var/lib/postgresql/data
+
+volumes:
+  pgdata-ichsan:
