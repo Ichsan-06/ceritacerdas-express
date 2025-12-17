@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    image: cerita-cerdas-app:1.0
+    image: cerita-cerdas-app:1.1
     container_name: ceritacerdas-express
     restart: always
     env_file: .env
