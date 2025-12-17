@@ -28,5 +28,15 @@ services:
     volumes:
       - pgdata-ichsan:/var/lib/postgresql/data
 
+  nginx:
+    image: nginx:latest
+    container_name: ceritacerdas-nginx
+    restart: always
+    ports:
+      - "8001:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
 volumes:
   pgdata-ichsan:
